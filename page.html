@@ -18,6 +18,7 @@
 <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
 <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-5-5 5 5-5 5"/></symbol>
 <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+<symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V3m0 1c5-3 9 3 14 0v10c-5 3-9-3-14 0"/></symbol>
 <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4 4"/></symbol>
 <symbol id="i-down" viewBox="0 0 24 24"><path d="m7 10 5 5 5-5"/></symbol>
 <symbol id="i-book" viewBox="0 0 24 24"><path d="M12 5v15m0-15C8 2 3 4 3 4v15s5-2 9 1m0-15c4-3 9-1 9-1v15s-5-2-9 1"/></symbol>
@@ -59,6 +60,7 @@
   <button class="header-backup" id="backup-btn"><span><strong>Копия плана</strong><small id="header-sync-status">Только на устройстве</small></span><svg><use href="#i-download"/></svg></button>
 </header>
 <main>
+  <section class="day-closed" id="day-closed" role="status" aria-live="polite" aria-atomic="true" hidden></section>
   <div class="heading-row">
     <div class="heading-main"><div class="eyebrow" id="date-eyebrow">ПОНЕДЕЛЬНИК, 12 ОКТЯБРЯ</div><h1 id="page-heading">Твоя IT-практика</h1>
       <div class="period-summary" aria-label="Итоги периода"><span><strong id="stat-total">2</strong> <span id="stat-total-title">цели</span></span><span><strong id="stat-done">0</strong> выполнено</span><span id="stat-short" hidden></span><span><strong id="stat-time">2 ч</strong> запланировано</span></div>

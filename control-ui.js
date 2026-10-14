@@ -3,6 +3,11 @@ var ControlUI=(()=>{
   let actions,state,selected,today,timer=null,moving=null,practice=null,reviewRows=[];
   const TIMER_KEY='my-focus:personal-goals:v1:timer';
   const fmt=s=>new Intl.DateTimeFormat('ru-RU',{day:'numeric',month:'short',timeZone:'UTC'}).format(M.date(s));
+  function dayClosure(plan,date,current,view){
+    if(view!=='day'||current>date)return '';
+    const day=M.calendarDay(plan,current,date);if(!day.allDone)return '';
+    return '<span class="day-closed-icon" aria-hidden="true"><svg><use href="#i-flag"/></svg></span><div><small>'+esc(fmt(current))+' · выполнено '+day.done+' / '+day.total+'</small><strong>День закрыт. Ты молодец!</strong><p>Все задачи выполнены. Можно спокойно отдыхать.</p></div><svg class="day-closed-check" aria-hidden="true"><use href="#i-check"/></svg>';
+  }
   function init(a){
     actions=a;try{const t=JSON.parse(localStorage.getItem(TIMER_KEY));if(t&&typeof t.id==='string'&&M.validDate(t.date)&&Number.isFinite(t.seconds)&&t.seconds>=0&&(!t.running||Number.isFinite(t.startedAt)))timer=t;}catch(e){}
     $('#goal-scope').onchange=editorScope;$('#goal-metric-unit').onchange=metricOptions;
@@ -58,5 +63,5 @@ var ControlUI=(()=>{
       return '<button class="history-result" data-history-open="'+esc(x.g.id)+'" data-date="'+date+'" data-entry-key="'+esc(x.key||'')+'" data-entry-field="'+(x.field||'entries')+'"><small>'+fmt(date)+' · '+esc(status)+'</small><strong>'+esc(x.e.topic||x.title||x.g.title)+'</strong><span>'+esc(result.slice(0,140)||(x.status==='done'?'Добавить короткий результат занятия':'Открыть план и результат'))+'</span>'+ (x.e.actualMinutes!==undefined?'<small>Факт: '+x.e.actualMinutes+' мин</small>':'')+'</button>';
     }).join('')||(q?'<p>Записей не найдено.</p>':'<p class="recent-empty">Здесь появятся последние выполнения и записи. Результат можно добавить и после отметки задачи.</p>');
   }
-  return {init,render,editor,editorScope,metricOptions,metricFields,monthMarkup,calendarControls,openPractice,practiceFields};
+  return {init,render,dayClosure,editor,editorScope,metricOptions,metricFields,monthMarkup,calendarControls,openPractice,practiceFields};
 })();

@@ -52,6 +52,8 @@
     return format(s,{day:'numeric',month:'long'});
   }
   function render() {
+    const closure=ControlUI.dayClosure(state,now(),selected,view);
+    $('#day-closed').hidden=!closure;$('#day-closed').innerHTML=closure;
     $$('.main-nav [data-view],.period-tabs [data-view]').forEach(b=>{const on=b.dataset.view===view;b.classList.toggle('active',on&&b.closest('.main-nav'));b.classList.toggle('selected',on&&b.closest('.period-tabs'));if(b.getAttribute('role')==='tab')b.setAttribute('aria-selected',String(on));});
     const achievements=view==='achievements';
     $('#plan-workspace').hidden=achievements;$('#achievements-section').hidden=!achievements;
