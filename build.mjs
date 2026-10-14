@@ -1,0 +1,11 @@
+import { readFile, writeFile, mkdir, rm } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
+const dir=dirname(fileURLToPath(import.meta.url));
+const [page,css,model,learningModel,game,learningUI,voiceInput,voiceUI,controlModel,controlUI,storage,sync,app]=await Promise.all(['page.html','styles.css','model.js','learning-model.js','game-ui.js','learning-ui.js','voice-input.js','voice-ui.js','control-model.js','control-ui.js','storage.js','sync.js','app.js'].map(f=>readFile(join(dir,f),'utf8')));
+const html=page.replace('/*__CSS__*/',()=>css).replace('/*__MODEL__*/',()=>model).replace('/*__LEARNING_MODEL__*/',()=>learningModel).replace('/*__GAME__*/',()=>game).replace('/*__LEARNING_UI__*/',()=>learningUI).replace('/*__VOICE_INPUT__*/',()=>voiceInput).replace('/*__VOICE_UI__*/',()=>voiceUI).replace('/*__CONTROL_MODEL__*/',()=>controlModel).replace('/*__CONTROL_UI__*/',()=>controlUI).replace('/*__STORAGE__*/',()=>storage).replace('/*__SYNC__*/',()=>sync).replace('/*__APP__*/',()=>app);
+await rm(join(dir,'dist'),{recursive:true,force:true});
+await mkdir(join(dir,'dist'),{recursive:true});
+await writeFile(join(dir,'dist/index.html'),html);
+await writeFile(join(dir,'dist/.nojekyll'),'');
+console.log('Built self-contained HTML: '+Buffer.byteLength(html)+' bytes');
