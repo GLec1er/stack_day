@@ -1,0 +1,3 @@
+const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm'),path=require('node:path');
+const c={URL};vm.createContext(c);for(const f of ['model.js','learning-model.js','learning-ui.js'])vm.runInContext(fs.readFileSync(path.join(__dirname,'../'+f),'utf8'),c);
+test('a goal card renders its saved topic result and actual time without a historical-editor context',()=>{const g={id:'a',title:'Чтение',horizon:'day',kind:'system',steps:[],completions:{}};c.LearningModel.saveEntry(g,'2026-10-13',{topic:'TTL',result:'Срок жизни ключа',actualMinutes:25});const html=c.LearningUI.inline(g,'2026-10-13',false);assert.ok(html.includes('TTL'));assert.ok(html.includes('Срок жизни ключа'));assert.ok(html.includes('25 мин'));});

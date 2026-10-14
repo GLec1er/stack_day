@@ -218,3 +218,11 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Stackday: local build, credentials and personal backups
+node_modules/
+.openai/
+.DS_Store
+stackday*.json
+my-focus*.json
+backups/
