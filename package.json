@@ -1,0 +1,12 @@
+{
+  "name": "stackday",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Личный трекер IT-практики",
+  "license": "MIT",
+  "engines": { "node": ">=24" },
+  "scripts": {
+    "test": "node --test tests/*.test.cjs",
+    "build": "node build.mjs"
+  }
+}
